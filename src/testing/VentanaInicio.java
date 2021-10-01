@@ -46,7 +46,7 @@ public class VentanaInicio extends JFrame {
 	public VentanaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// setBounds(100, 100, 450, 300);
-		this.setTitle("Inserte su c�digo aqu�");
+		this.setTitle("Inserte su codigo aqui");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,7 +55,7 @@ public class VentanaInicio extends JFrame {
 		scrollPane = new JScrollPane(textArea);
 		scrollPane.setBounds(5, 5, 875, 456);
 
-		btnElegir = new JButton("Elegir M�todo");
+		btnElegir = new JButton("Elegir Metodo");
 		btnElegir.setBounds(400, 500, 130, 30);
 		btnElegir.addActionListener(new ActionListener() {
 
@@ -70,8 +70,8 @@ public class VentanaInicio extends JFrame {
 					return;
 				}
 				
-				Object metodoElegido = JOptionPane.showInputDialog(null, "Selecciona un m�todo para analizar",
-						"M�todos", JOptionPane.QUESTION_MESSAGE, null, nombreMetodos, nombreMetodos[0]);
+				Object metodoElegido = JOptionPane.showInputDialog(null, "Selecciona un metodo para analizar",
+						"Metodos", JOptionPane.QUESTION_MESSAGE, null, nombreMetodos, nombreMetodos[0]);
 
 				int numeroMetodo = devuelveNumeroMetodoElegido(metodoElegido);
 				
@@ -89,23 +89,26 @@ public class VentanaInicio extends JFrame {
 				
 				LineasEnBlanco lineasEnBlanco = new LineasEnBlanco(metodoSeleccionado);
 				
-				SoloComentarios lineasComentadas = new SoloComentarios(metodoSeleccionado);		
+				SoloComentarios soloComentarios = new SoloComentarios(metodoSeleccionado);		
 
-		
+				Halstead halstead = new Halstead(metodoSeleccionado);
+				
 				int totalLineas = totalLineasCodigo.cantTotalLineasCodigo();
 				
 				String resultados = 
-						"Complejidad Ciclom�tica: " + (mc.matchPattern() + 1) +
-						"\nS�lo c�digo: " + sc.cantLineasSoloCodigo() +
+						"Complejidad Ciclomatica: " + (mc.matchPattern() + 1) +
+						"\nSolo codigo: " + sc.cantLineasSoloCodigo() +
 						"\nTotal de lineas: " + totalLineas +
-						"\nLineas comentadas: " + lineasComentadas.cantLineasComentadas() + 
+						"\nLineas comentadas: " + soloComentarios.cantLineasComentadas() + 
 						"\nLineas en blanco: " + lineasEnBlanco.calcular() + 
-						"\nPorcentaje de lineas comentadas: " + (((float)lineasComentadas.cantLineasComentadas()/(float)sc.cantLineasSoloCodigo())*100)+ "%" +
+						"\nPorcentaje de lineas comentadas: " + (((float)soloComentarios.cantLineasComentadas()/(float)sc.cantLineasSoloCodigo())*100)+ "%" +
 						"\nFanIn: " + fanIn.calcularFanIn((String)metodoElegido) +
-						"\nFanOut: " + fanOut.calcularFanOut((String)metodoElegido)
+						"\nFanOut: " + fanOut.calcularFanOut((String)metodoElegido) +
+						"\nLongitud: " + halstead.getLongitud() +
+						"\nVolumen: " + halstead.getVolumen()
 						;
 				
-				JOptionPane.showMessageDialog(null,resultados, "AN�LISIS DEL M�TODO \"" + metodoElegido + "\"", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,resultados, "ANALISIS DEL METODO \"" + metodoElegido + "\"", JOptionPane.INFORMATION_MESSAGE);
 
 				
 			}
