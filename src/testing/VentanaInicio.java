@@ -87,12 +87,20 @@ public class VentanaInicio extends JFrame {
 				
 				TotalLineasCodigo totalLineasCodigo = new TotalLineasCodigo(metodoSeleccionado);
 				
+				LineasEnBlanco lineasEnBlanco = new LineasEnBlanco(metodoSeleccionado);
+				
+				int totalLineas = totalLineasCodigo.cantTotalLineasCodigo();
+				
 				String resultados = 
 						"Complejidad Ciclomática: " + (mc.matchPattern() + 1) +
 						"\nSólo código: " + sc.cantLineasSoloCodigo() +
-						"\nTotal de lineas: " + totalLineasCodigo.cantTotalLineasCodigo() +
+						"\nTotal de lineas: " + totalLineas +
+						"\nLineas comentadas: " + sc.getLineasComentadas() + 
+						"\nLineas en blanco: " + lineasEnBlanco.calcular() + 
+						"\nPorcentaje de lineas comentadas: " + (((float)sc.getLineasComentadas()/(float)sc.cantLineasSoloCodigo())*100)+ "%" +
 						"\nFanIn: " + fanIn.calcularFanIn((String)metodoElegido) +
-						"\nFanOut: " + fanOut.calcularFanOut((String)metodoElegido);
+						"\nFanOut: " + fanOut.calcularFanOut((String)metodoElegido)
+						;
 				
 				JOptionPane.showMessageDialog(null,resultados, "ANÁLISIS DEL MÉTODO \"" + metodoElegido + "\"", JOptionPane.INFORMATION_MESSAGE);
 

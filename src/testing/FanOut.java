@@ -19,7 +19,7 @@ public class FanOut {
 		Matcher mat2 = regex2.matcher(bodyMetodo);
 		int contador = 0;
 		while(mat2.find()) {
-			System.out.println(mat2.group());
+			//System.out.println(mat2.group());
 			if(nombresFunciones.contains(mat2.group()))
 				contador++;
 		}
@@ -46,7 +46,7 @@ public class FanOut {
 			Matcher mat2 = regex2.matcher(resultadoPrevio);
 			if (mat2.find())
 				nombres.add(mat2.group());
-			System.out.println(mat2.group());
+			//System.out.println(mat2.group());
 		}
 		return nombres;
 	}

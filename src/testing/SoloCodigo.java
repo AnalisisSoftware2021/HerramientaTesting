@@ -7,27 +7,29 @@ import java.util.regex.Pattern;
 public class SoloCodigo {
 
 	String texto;
-
+	private int lineasComentadas;
 	public SoloCodigo(String texto) {
 		this.texto = texto;
+		this.lineasComentadas = 0;
 	}
 
 	public int cantLineasSoloCodigo() {
 		texto = texto.replaceAll("\t","");
-				
+		texto = texto.replaceAll("^(\n)","");
+		int aux = 0;
+		
 		String[] totalLineas = texto.split("\n");
 
-		int lineasComentadas = 0;
 		int bandera = 0;
 		int banderaMismaLinea = 0;
 		for (String string : totalLineas) {
 			if (matchPattern(string) == true)
-				lineasComentadas++;
+				aux++;
 
 			if (matchPattern2(string) == true && bandera == 0) {
 				bandera = 1;
 				banderaMismaLinea = 1;
-				lineasComentadas++;
+				aux++;
 			}
 
 			if (banderaMismaLinea == 1) {
@@ -41,11 +43,20 @@ public class SoloCodigo {
 				if (matchPattern3(string) == true) {
 					bandera = 0;
 				}
-				lineasComentadas++;
+				aux++;
 			}
 		}
 		
-		return totalLineas.length - lineasComentadas;
+		
+		LineasEnBlanco l = new LineasEnBlanco(texto);
+		
+		this.lineasComentadas = aux;
+		
+		return totalLineas.length - lineasComentadas - l.calcular();
+	}
+	
+	public int getLineasComentadas(){
+		return this.lineasComentadas;
 	}
 
 	public boolean matchPattern(String string) {

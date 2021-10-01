@@ -13,13 +13,16 @@ public class FanIn {
 
 	public int calcularFanIn(String metodo) {
 		int contador = 0;
-		String regex = "[\\s.]?" + metodo + "\\(";
+		String regex = "(new |[.])" + metodo + "\\(";
+		
+		//if(texto.matches("(public|private|protected) (int|boolean|String|float|double|long) "+metodo)) 
+			
 		Pattern pat = Pattern.compile(regex);
 		
 		Matcher mat = pat.matcher(texto);
 		while (mat.find())
 			contador++;
 		
-		return (contador == 0) ? contador : contador - 1;
+		return contador;
 	}
 }
