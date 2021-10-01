@@ -1,5 +1,6 @@
 package testing;
 
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +14,9 @@ public class SoloCodigo {
 
 	public int cantLineasSoloCodigo() {
 		texto = texto.replaceAll("\t","");
+				
 		String[] totalLineas = texto.split("\n");
+
 		int lineasComentadas = 0;
 		int bandera = 0;
 		int banderaMismaLinea = 0;

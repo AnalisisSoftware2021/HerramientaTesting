@@ -24,7 +24,7 @@ public class FanOut {
 				contador++;
 		}
 		
-		return contador-1;
+		return (contador == 0) ? contador : contador - 1;
 	}
 	
 	public String separarMetodo(String metodo) {

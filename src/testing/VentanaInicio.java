@@ -78,11 +78,13 @@ public class VentanaInicio extends JFrame {
 				String metodoSeleccionado = metodos.get(numeroMetodo);
 				
 				McCabe mc = new McCabe(metodoSeleccionado);
-				//System.out.println("Complejidad Ciclomática: " + (mc.matchPattern() + 1));
+				
 				SoloCodigo sc = new SoloCodigo(metodoSeleccionado);
-				//System.out.println("Sólo código: " + sc.cantLineasSoloCodigo());
-				FanIn fanIn = new FanIn(metodoSeleccionado);
-				FanOut fanOut = new FanOut(metodoSeleccionado);
+				
+				FanIn fanIn = new FanIn(textArea.getText());
+				
+				FanOut fanOut = new FanOut(textArea.getText());
+				
 				TotalLineasCodigo totalLineasCodigo = new TotalLineasCodigo(metodoSeleccionado);
 				
 				String resultados = 
@@ -128,6 +130,7 @@ public class VentanaInicio extends JFrame {
 			if (finMetodo == 1 && contador == 0) {
 				posicion = i + 1;
 				metodo = codigo.substring(inicio, posicion);
+				metodo = metodo.replaceAll("^(\n{1,})","");
 				this.metodos.add(metodo);
 				inicio = posicion;
 				finMetodo = 0;
