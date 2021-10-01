@@ -33,6 +33,9 @@ public class SoloComentarios {
 					esLineaComentada = true;
 					contador++;
 				}
+				if (string.contains("*/")) {
+					esLineaComentada = false;
+				}
 			}
 		}
 
